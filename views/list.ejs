@@ -10,15 +10,13 @@
 
 <body>
     <h1 style="color: purple"><%=currentDay%> List</h1>
-    <ul>
-        <li>Food</li>
-        <li>Pizza</li>
-        <li>Cocacola</li>
 
+    <ul>
         <% listItems.forEach(item => { %>
-            <li><%= item %></li>         
+        <li><%= item %></li>
         <% }) %>
     </ul>
+
     <form action="/" method="post">
         <input type="text" placeholder="add to list" name="newItem"></input>
         <button type="submit">Submit</button>

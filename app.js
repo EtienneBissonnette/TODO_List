@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const port = 3000;
-var items = [];
+let items = [];
 
 app.set("view engine", "ejs");
 
@@ -16,14 +16,14 @@ app.listen(port, function () {
 });
 
 app.get('/', function (req, res) {
-    var options = {
+    let options = {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
         day: 'numeric'
     };
 
-    var today = new Date();
+    let today = new Date();
     res.render('list', {
         currentDay: today.toLocaleDateString("en-US",options),
         listItems: items,
