@@ -6,21 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODO List</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-    <h1 style="color: purple"><%=currentDay%> List</h1>
+    <div class="box" id = "heading">
+        <h1><%=listTitle%></h1>
+    </div>
 
-    <ul>
+    <div class="box">
         <% listItems.forEach(item => { %>
-        <li><%= item %></li>
+        <div class="item">
+            <input type="checkbox">
+            <p><%= item %></p>
+        </div>
         <% }) %>
-    </ul>
-
-    <form action="/" method="post">
-        <input type="text" placeholder="add to list" name="newItem"></input>
-        <button type="submit">Submit</button>
-    </form>
+        <form class="item" action="/" method="post">
+            <input type="text" placeholder="add to list" name="newItem" autocomplete="off"></input>
+            <button type="submit" name="list" value = <%= listTitle %> >+</button>
+        </form>
+    </div>
 </body>
 
 </html>
