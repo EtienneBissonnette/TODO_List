@@ -1,18 +1,29 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const date = require(__dirname + '/date.js');
+const mongoose = require('mongoose');
 
 const app = express();
 const port = 3000;
-const items = [];
 const workItems = [];
 
 
+// Mongoose configuration for MongoDB connection
+const uri = "mongodb+srv://Admin:adminpassword@cluster0.5hguabb.mongodb.net/?retryWrites=true&w=majority"
+mongoose.connect(uri);
+
+const itemSchema = {
+    name: String,
+};
+
+const Item = mongoose.model('Item', itemSchema);
+
+//Setting up app
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 app.use(express.static("Public"))
 
 app.listen(port, function () {
@@ -23,9 +34,12 @@ app.listen(port, function () {
 
 app.get('/', function (req, res) {
 
-    res.render('list', {
-        listTitle: date.getDate(),
-        listItems: items,
+    const items = []
+    Item.find({}, (e, items) => {
+        res.render('list', {
+            listTitle: "Today",
+            listItems: items,
+        });
     });
 });
 
@@ -38,24 +52,18 @@ app.get('/work', function (req, res) {
     });
 });
 
-// GET /work
+// GET /about
 
 app.get('/about', function (req, res) {
-    res.render('about')
+    res.render('about');
 });
 
 app.post('/', function (req, res) {
 
-    let item = req.body.newItem;
-
-    if (req.body.list === "Work") {
-        workItems.push(item);
-        res.redirect("/work");
-    } else {
-        items.push(item);
-        res.redirect("/");
-        console.log(req.body)
-    }
-})
-
-
+    const item = req.body.newItem;
+    const newItem = new Item({
+            name: item
+        });
+    newItem.save();
+    res.redirect('/');
+});
