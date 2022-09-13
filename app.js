@@ -35,7 +35,7 @@ app.listen(port, function () {
 app.get('/', function (req, res) {
 
     const items = []
-    Item.find({}, (e, items) => {
+    Item.find({}, (e,items) => {
         res.render('list', {
             listTitle: "Today",
             listItems: items,
@@ -58,12 +58,29 @@ app.get('/about', function (req, res) {
     res.render('about');
 });
 
+//POST /home
+
 app.post('/', function (req, res) {
 
     const item = req.body.newItem;
     const newItem = new Item({
-            name: item
-        });
+        name: item
+    });
     newItem.save();
     res.redirect('/');
 });
+
+//POST /delete
+
+app.post('/delete', function (req, res) {
+    const deletedItemID = req.body.checkbox
+    Item.findByIdAndDelete(deletedItemID, e => {
+        if (e) {
+            console.log(e);
+        } else {
+            console.log("Deleted item")
+        }
+    })
+    res.redirect('/');
+
+})
