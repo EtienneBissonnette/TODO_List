@@ -1,13 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+require("dotenv").config();
 
 const app = express();
 const port = 3000;
 
 
 // Mongoose configuration for MongoDB connection
-const uri = "mongodb+srv://Admin:adminpassword@cluster0.5hguabb.mongodb.net/?retryWrites=true&w=majority"
+const uri = process.env.uri
 mongoose.connect(uri);
 
 const itemSchema = {
