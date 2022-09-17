@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 require("dotenv").config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 
 // Mongoose configuration for MongoDB connection
@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("Public"))
 
 app.listen(port, function () {
-    console.log('listening on port' + port);
+    console.log('listening on port ' + port);
 });
 
 // GET /home
