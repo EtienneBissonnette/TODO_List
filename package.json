@@ -15,6 +15,9 @@
   ],
   "author": "Etienne B",
   "license": "ISC",
+  "engines": {
+    "node": "16.16.0"
+  },
   "bugs": {
     "url": "https://github.com/EtienneBissonnette/TODO_List/issues"
   },
