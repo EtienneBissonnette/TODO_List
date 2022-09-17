@@ -118,7 +118,6 @@ app.post('/delete', function (req, res) {
 
     const deletedItemID = req.body.checkbox;
     const listTitle = req.body.listTitle;
-    console.log(listTitle)
 
     if (listTitle == "Today") {
         Item.findByIdAndDelete(deletedItemID, e => {
